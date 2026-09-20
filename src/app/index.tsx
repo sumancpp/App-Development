@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Text, View, StyleSheet, Button, Alert, Switch, ScrollView,
  TextInput, Pressable, Image, 
- ImageBackground} from "react-native";
+ ImageBackground,
+ FlatList} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function HomeScreen(){
   
@@ -11,8 +13,25 @@ function HomeScreen(){
   const pressMe = () => {
     Alert.alert("Button Clicked");
   }
+
+  const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+  },
+];
+
+
   return(
-    <ScrollView>
+    <SafeAreaView>
       {/* {[...Array(60)].map((_, i) => (
         <Text key={i} style={{fontSize:20 }}>Hello I am Suman Maity,{i + 1}</Text>
       ))} */}
@@ -50,13 +69,24 @@ style = {{
 }}
 /> */}
 
-<ImageBackground
+{/* <ImageBackground
 source={{
   uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTulcuAnYpbLBGRJlau2476cXdLU1oIJnDsbmYPeOnLLv861YpLl7lz0ZY&s"
 }}
+style = {{
+  height: 350,
+  width : 350
+}}
+/> */}
+
+
+<FlatList
+data={DATA}
+keyExtractor={item => item.id}
+renderItem={({item}) => <Text>{item.id}</Text>}
 />
 
-    </ScrollView>
+    </SafeAreaView>
   )
 }
 
